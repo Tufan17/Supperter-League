@@ -1,13 +1,30 @@
-const SupporterModel = require('../models/SupporterModel.js')
+
+const index = async (req, res, next) => {
+
+}
+
+
+const read = async (req, res, next) => {
+
+}
 
 const store = async (req, res, next) => {
-const {user_id,team_id}= req.body;
 
-return {user_id,team_id};
+}
 
-};
+const update = async (req, res, next) => {
 
-module.exports={
+}
+
+const destroy = async (req, res, next) => {
+
+}
+
+  
+  module.exports={
+    index,
+    read,
     store,
-    
-};
+    update,
+    destroy
+  };

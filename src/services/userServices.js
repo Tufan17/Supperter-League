@@ -1,3 +1,5 @@
+const CountryModel = require("../models/CountryModel");
+const RoleModel = require("../models/RoleModel");
 const UserModel = require("../models/UserModel");
 const validator = require("validator");
 
@@ -18,8 +20,19 @@ const createUser = async (user) => {
   if (!validator.isLength(user.password, { min: 6 })) {
     throw new Error("Password must be at least 6 characters long");
   }
+  const country =await CountryModel.findId(user.country_id);
+
+  if (!country) {
+    throw new Error("Invalid country ID");
+  }
+  const role = await RoleModel.findId(user.role_id);
+
+  if (!role) {
+    throw new Error("Invalid role ID");
+  }
 
   const existingUser = await findByEmail(user.email);
+  
   if (existingUser.data) {
     throw new Error("User email already exists");
   }

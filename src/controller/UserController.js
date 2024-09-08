@@ -17,9 +17,35 @@ const index = async (req, res, next) => {
   }
 };
 
-const create = async (req, res, next) => {
+const read = async (req, res, next) => {
   try {
-    const { email, password, name } = req.body;
+    const id =req.params.id;
+    const user = await UserModel.findId(id);
+    if(user){
+      const response = formatApiResponse(
+        req,
+        "User Read Request",
+        "User Read Request Success.",
+        JSON.stringify(user)
+      );
+      res.status(200).json(response);  
+    }else{
+      const response = formatApiResponse(
+        req,
+        "User Read Request",
+        "User Read Request Error.",
+        "User Read Request Error: User not found",
+      );
+      res.status(400).json(response);  
+    }
+    } catch (error) {
+    next(error);
+  }
+};
+
+const store = async (req, res, next) => {
+  try {
+    const { email, password, name, surname, nickname,country_id,role_id } = req.body;
     let response;
     const user = req.session.user;
 
@@ -35,7 +61,7 @@ const create = async (req, res, next) => {
       return;
     }
     try {
-      await userServices.createUser({ email, password, name, role_id: 2 });
+      await userServices.createUser({ email, password, name, surname, nickname,role_id, country_id});
       response = formatApiResponse(
         req,
         "User Create Request",
@@ -52,44 +78,6 @@ const create = async (req, res, next) => {
         400
       );
       res.status(400).json(response);
-    }
-  } catch (error) {
-    next(error);
-  }
-};
-
-const read = async (req, res, next) => {
-  try {
-    const { email } = req.body;
-    if (!email) {
-      const response = formatApiResponse(
-        req,
-        "User Read Request",
-        "User Read Request Error: You must send an e-mail address.",
-        "",
-        400
-      );
-      res.status(400).json(response);
-      return;
-    }
-    const data = await userServices.getUserByEmail(email);
-    if (data.data === null) {
-      const response = formatApiResponse(
-        req,
-        "User Read Request",
-        "User Read Request Error: No user.",
-        "",
-        404
-      );
-      res.status(404).json(response);
-    } else {
-      const response = formatApiResponse(
-        req,
-        "User Read Request",
-        "User Read Request Success.",
-        JSON.stringify(data.data)
-      );
-      res.status(200).json(response);
     }
   } catch (error) {
     next(error);
@@ -190,7 +178,7 @@ const destroy = async (req, res, next) => {
 
 module.exports = {
   index,
-  create,
+  store,
   read,
   update,
   destroy,

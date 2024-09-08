@@ -4,8 +4,7 @@ const path = require("path");
 const http = require("http");
 const cors = require("cors");
 const multer = require("multer");
-const { apiRouter } = require("./routes/api");
-const { webRouter } = require("./routes/web");
+const { router } = require("./src/routes/index.js");
 
 dotenv.config();
 const upload = multer();
@@ -28,8 +27,8 @@ app.use(cors(corsOptions));
 
 
 app.use('/storage', express.static(path.join(__dirname, 'storage')));
-app.use("/", webRouter);
-app.use("/api", upload.none(), apiRouter);
+
+app.use("/", router);
 
 
 const server = http.createServer(app);

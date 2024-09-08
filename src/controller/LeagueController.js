@@ -14,7 +14,7 @@ const index = async (req, res, next) => {
             req,
             "Leagues List Request",
             "Leagues List Request Success.",
-            JSON.stringify(leagues)
+            leagues
             );
             res.status(200).json(response);
         

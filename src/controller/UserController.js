@@ -9,7 +9,7 @@ const index = async (req, res, next) => {
       req,
       "User List Request",
       "User List Request Success.",
-      JSON.stringify(users)
+      users
     );
     res.status(200).json(response);
   } catch (error) {
@@ -26,7 +26,7 @@ const read = async (req, res, next) => {
         req,
         "User Read Request",
         "User Read Request Success.",
-        JSON.stringify(user)
+        user
       );
       res.status(200).json(response);  
     }else{
@@ -66,7 +66,7 @@ const store = async (req, res, next) => {
         req,
         "User Create Request",
         "User Create Request Success: User created successfully",
-        JSON.stringify({ email, password, name, role: 2 })
+        { email, password, name, role: 2 }
       );
       res.status(200).json(response);
     } catch (error) {
@@ -106,7 +106,7 @@ const update = async (req, res, next) => {
         req,
         "User Update Request",
         "User Update Request Success.",
-        JSON.stringify({ email, name, role_id })
+        { email, name, role_id }
       );
       res.status(200).json(response);
     } catch (error) {

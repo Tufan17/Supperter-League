@@ -8,7 +8,7 @@ const index = async (req, res, next) => {
         req,
         "Country List Request",
         "Country List Request Success.",
-        JSON.stringify(countries)
+        countries
       );
       res.status(200).json(response);
     } catch (error) {
@@ -26,7 +26,7 @@ const index = async (req, res, next) => {
           req,
           "Country Read Request",
           "Country Read Request Success.",
-          JSON.stringify(country)
+          country
         );
         res.status(200).json(response);  
       }else{
@@ -71,7 +71,7 @@ const store = async (req, res, next) => {
             req,
             "Country Store Request",
             "Country Store Request Success.",
-            JSON.stringify(newCountry)
+            newCountry
           );
           res.status(200).json(response);  
         }

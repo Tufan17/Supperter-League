@@ -34,7 +34,7 @@ const login = async (req, res, next) => {
       req,
       "Login Request",
       result.message,
-      result.data ? JSON.stringify(result) : "",
+      result.data ? result : "",
       result.status === "success" ? 200 : 400
     );
     req.session.user = result.data;
@@ -119,7 +119,7 @@ const register =async (req, res, next) => {
       req,
       "Logout Request",
       "Register Success",
-      JSON.stringify(result),
+      result,
       200
     );
     res.status(200).json(response);

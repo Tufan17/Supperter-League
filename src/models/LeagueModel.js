@@ -5,7 +5,6 @@ class LeagueModel extends BaseModel {
     super('leagues');
   }
 
-  
 }
 
 module.exports = new LeagueModel();

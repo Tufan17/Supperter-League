@@ -35,10 +35,6 @@ class BaseModel {
     return !!exists;
   }
   
-
-
-
-
   async getAll() {
     const data = await connection.table(this.modelName).whereNull('deleted_at');
     return data;
